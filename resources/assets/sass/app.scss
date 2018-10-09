@@ -1,0 +1,71 @@
+$color1: #20a286;
+
+@import 'bootbox';
+@import 'core';
+@import 'home';
+@import 'dashboard';
+
+.btn-hrc-1 {
+  margin: 10px 0;
+  height: 40px;
+
+  background: $color1;
+  color: #fff;
+  font-size: 12pt;
+  font-weight: 500;
+
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  &:hover {
+    color: #fff;
+    background: lighten($color1, 10%);
+  }
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#youtubeFrame {
+  .btn-close-youtube-frame {
+    width: 200px;
+    height: 50px;
+    color: #20a286;
+    display: block;
+    text-align: center;
+    background: #fff;
+    font-weight: 700;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    font-size: 16pt;
+
+    border: none;
+
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 5-7 */
+    filter: alpha(opacity=50);
+    /* Netscape */
+    -moz-opacity: 0.5;
+    /* Safari 1.x */
+    -khtml-opacity: 0.5;
+    /* Good browsers */
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 1050px) {
+  #youtubeFrame .btn-close-youtube-frame {
+    font-size: 12pt;
+    width: 160px;
+    height: 40px;
+  }
+}
