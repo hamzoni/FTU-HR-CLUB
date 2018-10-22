@@ -19,9 +19,9 @@
                 <li><a href="/">Tổng quan</a></li>
                 <li><a href="{{route('partners')}}">Đối tác và bảo trợ</a></li>
                 <li><a href="{{route('articles')}}">Tin tức</a></li>
-                {{--<li><a href="{{route('jobSelectionTest')}}">Test chọn nghề</a></li>--}}
-                {{--<li><a href="{{route('home.letter')}}">4 năm đại học của tôi</a></li>--}}
-                <li><a href="{{route('joins')}}" class="active">Tham dự chung kết</a></li>
+                <li><a href="{{route('jobSelectionTest')}}">Test chọn nghề</a></li>
+                <!-- <li><a href="{{route('home.letter')}}">4 năm đại học của tôi</a></li> -->
+                <!-- <li><a href="{{route('joins')}}" class="active">Tham dự chung kết</a></li> -->
                 @if (Auth::check())
                 <li><a href="{{ route('auth.signOut') }}">Thoát</a></li>
                 @endif

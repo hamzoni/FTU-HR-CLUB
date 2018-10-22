@@ -2,85 +2,194 @@
 @extends('layouts.user.home.application', ['bodyClasses' => $bodyClasses])
 
 @section('content')
-    <div class="intro-section final-intro-section">
-        <video poster="http://uvtn.dev/bg_video/bg_video.png" id="bgvid" playsinline="" autoplay="" muted="" loop="">
-            <source src="final/top6.mp4" type="video/mp4">
-        </video>
-        <div class="col-sm-push-1 col-sm-7 logo-slogan">
+    <div class="intro-section">
+        <div class="col-sm-push-6 col-sm-6 text-center logo-slogan">
             <div>
-                <h1>Bước ngoặt<br/>Đến từ <span id="switch-text">yêu thương</span></h1>
-                <p class="text-description">Chính thức lộ diện 6 gương mặt của Đêm Chung kết Ứng viên Tài năng 2017
-                     Ai sẽ là người bản lĩnh dám thay đổi chính mình? Ai sẽ gương mặt tiếp theo truyền cảm hứng cho thế hệ sinh viên bước ra thế giới? Ai sẽ là quán quân của UVTN 2017</p>
+                <img src="/static/user/images/logo-slogan.png" alt="" style="width: 65%;"/>
                 <br>
                 <br>
-                <a href="/joins" class="btn btn-default btn-join btn-white">Đăng kí tham dự Chung kết</a>
-                <a href="/articles" class="btn btn-default btn-join btn-transparent">Top 6 Ứng viên Tài năng là ai?</a>
-                <!-- <a href="javascript:;" class="btn btn-default btn-join btn-transparent subscribe-open">Đăng kí nhận thông báo</a> -->
+                <a href="/joins" class="btn btn-default btn-join">Tham gia</a>
             </div>
         </div>
         <div class="clearfix"></div>
     </div>
 
-    <div class="top32-section">
-        <h2>Chào mừng đến với Top 6</h2>
-        <div class="top-list">
-            @foreach ($top32 as $item)
-                <div class="top-item">
-                    @if($item->url)
-                        <a href="{{ $item->url }}">
-                            <div class="overlay"></div>
-                        </a>
-                    @endif
-                    <img src="{{ asset('final/avatar/'.$item->image) }}" class="avatar"/>
-                    <a href="{{ $item->linkedin }}" target="_blank"><span class="linkedin"><span
-                                    class="fa fa-linkedin-square"></span> </span></a>
-
-                    <div class="top-info">
-                        <p class="name">{{ $item->name }}</p>
-                        <p class="university">{{ $item->university }}</p>
+    <div class="news-section">
+        @foreach($latestArticles as $article)
+        <div class="col-sm-3 news-item">
+            <div class="row">
+                <div class="thumb">
+                    <div class="thumb bg" style="background-image: url('{{asset($article->images_url)}}');"></div>
+                </div>
+                <div>
+                    <h3><a href="{{route('newsDetail', [$article->slug])}}">{{$article->title}}</a></h3>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        <div class="clearfix"></div>
+        <div class="news-section-intro">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-md-8 col-md-push-4">
+                        <div class="text-intro" id="main-text-intro" style="display: table-cell;vertical-align: middle;">
+                            <h3 class="text-primary" style="margin-top:10px;"><b>Bước ngoặt đổi thay</b></h3>
+                            <p>Mơ ước. Nỗ lực. Sáng kiến. Từ mùa đầu tiên vào năm 2010, Ứng viên Tài năng đã liên tục
+                                tái định nghĩa thế giới của các “cuộc thi sinh viên”, và tái khẳng định những gì người
+                                trẻ có thể làm khi họ có một ước mơ.</p>
+                            <p>Giây phút bạn sẵn sàng bước ra ngoài cánh cửa đại học trên đôi chân của mình, là bạn đã
+                                tạo nên một bước ngoặt đổi thay - đổi thay chính mình cho cuộc sống đang thay đổi trước
+                                mắt.</p>
+                            <p>Chúng tôi từng mơ tất cả các bạn sẽ có được sự sẵn sàng đó - bước ngoặt đó. Năm nay chúng
+                                tôi đã gần hơn với ước mơ ấy. <b style="color: #fff">Lần đầu tiên trong lịch sử của Ứng
+                                    viên Tài năng, mọi CV nộp trước mốc 2000 sẽ nhận được comment từ các chuyên gia đối
+                                    tác của chúng tôi.</b> Tấm hộ chiếu ra đời của các bạn, hãy tham gia Ứng viên Tài
+                                năng để làm hoàn hảo nó. </p>
+                            <p>Bên cạnh đó, các vòng Initial Interview, Assessment Camp, và The Final Round của Ứng viên
+                                Tài năng mùa 7 cũng sẽ bùng nổ về giá trị tuyển dụng, chuyên môn, và kết nối. </p>
+                            <p>Tất cả chúng tôi đang chờ bạn, để tìm thấy trong bước ngoặt của bạn, những bước ngoặt của
+                                chính chúng tôi.</p>
+                        </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            <div class="col-sm-6" style="padding-right: 0;">
+                <img src="/static/user/images/news-section-cover.png" alt=""/>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
-    <div class="process-section">
-        <img class="background" src="/final/challenger-recruitment.jpg" height="100%" style="display: none;">
-        <img class="background" src="/final/challenger-pro.jpg" height="100%" style="display: none;">
-        <img class="background" src="/final/challenger-assessors.jpg" height="100%">
-        <img class="background" src="/final/challenger-training.jpg" height="100%" style="display: none;">
-        <img class="background" src="/final/challenger-connect.jpg" height="100%" style="display: none;">
+    <div class="value-and-change-section">
+        <div class="col-sm-10 col-sm-push-1">
+            <div class="values">
+                <div class="section-header text-center">
+                    <h3 class="text-center">Bốn giá trị. Một bước ngoặt đổi thay.</h3>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3 value">
+                        <h4><b>Tuyển dụng</b></h4>
+                        <p>Trải nghiệm quy trình tuyển dụng thực tế với 4 vòng thi chuẩn hoá theo mô hình tuyển dụng các
+                            tập đoàn lớn trong nước và đa quốc gia.</p>
+                    </div>
+                    <div class="col-sm-3 value">
+                        <h4><b>Chuyên môn</b></h4>
+                        <p>Giải quyết các thử thách thuộc chuyên môn Marketing & Sales, Finance, HR, Supply Chain tại
+                            Assessment Camp, 2 ngày 1 đêm tại một biệt thự ngoại thành Hà Nội. </p>
+                    </div>
+                    <div class="col-sm-3 value">
+                        <h4><b>Kết nối</b></h4>
+                        <p>Sống giữa những người bạn đồng lứa xuất sắc và những người thầy tận tâm - đội ngũ Senior
+                            Managers kinh nghiệm đến từ các đối tác của chúng tôi.</p>
+                    </div>
+                    <div class="col-sm-3 value">
+                        <h4><b>Tỏa sáng</b></h4>
+                        <p>Tất cả chúng tôi chờ bạn ở đêm Chung kết, để được truyền cảm hứng và tìm thấy trong bước
+                            ngoặt của bạn, những bước ngoặt của chính chúng tôi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="top-members clearfix">
+            <div class="col-sm-10 col-sm-push-1">
+                <div class="col-sm-5">
+                    <img class="big-logo" src="/static/user/images/blue-logo.png" alt=""/>
+                </div>
+                <div class="col-sm-7">
+                    <div class="owl-slider-members owl-carousel">
+                        <div>
+                            <h3 class="text-primary"><b>Giải nhất</b></h3>
+                            <b>10.000.000 VNĐ tiền mặt</b>
+                            <ul>
+                                <li>01 suất lọt vào vòng Phỏng vấn cuối của chương trình Management Trainee 2018 của
+                                    Suntory Pepsico.
+                                </li>
+                                <li>01 khoá đào tạo Career Consulting trong 1 năm cùng Ms. Mai Thúy Hằng, Giám đốc Giải pháp Nguồn nhân lực tại Navigos Solutions - Navigos Search, trị giá 2000 USD/khoá.
+                                </li>
+                                <li>01 học bổng toàn phần khoá học Tài Chính, Kế Toán và Kinh Doanh quốc tế trị giá 400 USD/khoá tại ICAEW.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-primary"><b>Giải nhì</b></h3>
+                            <b>7.000.000 VNĐ tiền mặt</b>
+                            <ul>
+                                <li>01 suất lọt vào vòng Phỏng vấn cuối của chương trình Management Trainee 2018 của
+                                    Suntory Pepsico.
+                                </li>
+                                <li>01 khoá đào tạo Career Consulting trong 1 năm cùng Ms. Mai Thúy Hằng, Giám đốc Giải pháp Nguồn nhân lực tại Navigos Solutions - Navigos Search, trị giá 2000 USD/khoá.
+                                </li>
+                                <li>01 học bổng toàn phần khoá học Tài Chính, Kế Toán và Kinh Doanh quốc tế trị giá 400 USD/khoá tại ICAEW.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-primary"><b>Giải ba</b></h3>
+                            <b>5.000.000 VNĐ tiền mặt</b>
+                            <ul>
+                                <li>01 suất lọt vào vòng Phỏng vấn cuối của chương trình Management Trainee 2018 của
+                                    Suntory Pepsico.
+                                </li>
+                                <li>01 khoá đào tạo Career Consulting trong 1 năm cùng Ms. Mai Thúy Hằng, Giám đốc Giải pháp Nguồn nhân lực tại Navigos Solutions - Navigos Search, trị giá 2000 USD/khoá.
+                                </li>
+                                <li>01 học bổng toàn phần khoá học Tài Chính, Kế Toán và Kinh Doanh quốc tế trị giá 400 USD/khoá tại ICAEW.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 
-        <div class="col-md-offset-6 col-sm-6" style="background: #fff;">
-            <div class="process-slider">
-                <h2>Đêm chung kết</h2>
-                <p class="text-description">Chứng kiến bước ngoặt đổi thay cùng Top 6</p>
-                <div class="process-slider-content owl-carousel">
-                    <div>
-                        <!-- <h3>Tuyển dụng</h3> -->
-                        <p>Sau Assessment Camp, 6 ứng viên xuất sắc nhất sẽ được chọn lựa để bước vào Đêm Chung kết, diễn ra vào ngày 16/12/2017 - sân khấu nơi họ chứng tỏ bản thân để chinh phục nhà tuyển dụng và chinh phục khán giả.</p>
-                        <p>Tham gia đêm Chung kết, bạn sẽ hiểu được hiểu được Nhà tuyển dụng đánh giá những gì ở một Ứng viên và như thế nào là một ứng viên tài năng trong mắt Nhà Tuyển dụng thông qua 3 vòng thi:</p>
-                    </div>
-                    <div>
-                        <h3>Vòng 1: Thử thách Kinh doanh và Đánh giá năng lực chuyên môn</h3>
-                        <p>Trước khi trở thành một Ứng viên Tài năng, bản thân họ cần là một ứng viên sáng giá trong ngành nghề mình theo đuổi. Chính vì vậy, trong vòng thi này Top 6 chia làm 2 đội, mỗi đội sẽ tiến hành giải case mà ban tổ chức đưa ra từ trước, sau đó thuyết trình, phản biện lại đội bạn và trả lời câu hỏi của Ban giám khảo.</p>
-                    </div>
-                    <div>
-                        <h3>Vòng 2: Kĩ năng giao tiếp, ứng xử và giải quyết vấn đề liên quan đến con người trong công việc</h3>
-                        <p>Với các Nhà tuyển dụng, một Ứng viên Tài năng không chỉ giỏi về năng lực chuyên môn mà còn phải có thái độ làm việc chuyên nghiệp, khéo léo. 6 Ứng viên sẽ phải giải quyết các tình huống về các vấn đề giao tiếp, ứng xử và cộng tác với con người trong công việc. Top 3 ứng viên có điểm số cao nhất sau cả 2 vòng sẽ bước vào vòng 3.</p>
-                    </div>
-                    <div>
-                        <h3>Vòng 3:	Diễn thuyết về con đường tương lai và ý chí theo đuổi con đường đó</h3>
-                        <p>Yếu tố quyết định để nhà tuyển dụng lựa chọn một ứng viên cuối cùng, đó chính là nhìn vào định hướng nghề nghiệp, nhìn vào động lực, đam mê, tầm nhìn của ứng viên đối với sự nghiệp của mình. Trong vòng thi này, Top 3 sẽ chia sẻ về định hướng về sự nghiệp và động lực theo đuổi con đường đó.</p>
-                    </div>
-                    <!-- <div>
-                        <h3>Kết nối</h3>
-                        <p>Top 32, các bạn sẽ có 2 ngày 1 đêm để giữa những người bạn đồng lứa xuất sắc và những người
-                            thầy tận tâm - đội ngũ Senior Managers kinh nghiệm đến từ các đối tác của chúng tôi.</p>
-                        <p>Thử thách Nhà chung đã được chứng kiến nhiều tình bạn mới qua những khoảng thời gian thi đầy
-                            thử thách. Đặc biệt, phần Appreciation Party sẽ là một đêm để bạn thả lỏng bản thân, hoà vào
-                            với những người bạn mới là chính Top 32 và các Assessors.</p>
-                    </div> -->
+    <div class="process-section round1">
+        <img class="background" src="http://uvtn.dev/static/user/images/process-bg-round1.jpg" width="100%" height="0">
+        <img class="background" src="http://uvtn.dev/static/user/images/process-bg-round2.jpg" width="100%" height="0">
+        <img class="background" src="http://uvtn.dev/static/user/images/process-bg-round3.jpg" width="100%" height="0">
+        <img class="background" src="http://uvtn.dev/static/user/images/process-bg-round4.jpg" width="100%" height="0">
+        <div class="col-sm-5">
+            <div class=" process-slider owl-carousel">
+                <div>
+                    <h3><a href="javascript:">Vòng 1: CV & Test Tuyển dụng (30/10/2017 - 19/11/2017)</a></h3>
+                    <p>• Sở hữu một hành trang hoàn hảo để bước ra thị trường tuyển dụng: CV được chỉnh sửa, thi thử
+                        Test thực tế.</p>
+                    <p>• Ứng viên truy cập website www.uvtn.hrc.com.vn để nộp CV đăng ký tham gia cuộc thi theo
+                        4 bộ phận Marketing & Sales, Finance, Human Resources, Suppy Chain. 2000 ứng viên đầu tiên nộp CV sẽ nhận
+                        được comment cho CV đến từ HRC với chất lượng bảo đảm bởi bảo trợ chuyên môn.</p>
+                    <p>• Tất cả ứng viên sẽ được tham gia bài Test tuyển dụng sau khi nộp CV. Bài thi online gồm
+                        32 câu hỏi bằng Tiếng Anh để đánh giá năng lực tư duy (Numerical, Logical, Verbal) và
+                        mức độ phù hợp tính cách (SJT).</p>
+                </div>
+                <div>
+                    <h3><a href="javascript:">Vòng 2: Phỏng vấn Cá nhân (26/11/2017)</a></h3>
+                    <p>• Đã bao giờ bạn tự hỏi: "Tại sao mình không được gọi lại sau cuộc phỏng vấn ấy?"</p>
+                    <p>• Top 100 vượt qua vòng 1 sẽ tham gia phỏng vấn 1-1 với các chuyên gia tuyển dụng.
+                        Nội dung phỏng vấn bao gồm các câu hỏi đánh giá năng lực và các câu hỏi đánh giá
+                        kiến thức chuyên ngành.</p>
+                </div>
+                <div>
+                    <h3><a href="javascript:">Vòng 3: Thử thách Nhà chung (09/12/2017 - 10/12/2017) cùng chuỗi Đào tạo
+                            Kỹ năng Chuyên sâu</a></h3>
+                    <p>• Vén màn bí mật đằng sau vòng thi thử thách nhất của các tập đoàn hàng đầu tại Việt Nam - Vòng
+                        Assessment</p>
+                    <p>• Top 32 ứng viên xuất sắc nhất sẽ tham gia chuỗi trải nghiệm 2 ngày 1 đêm với 2 hoạt
+                        động chính. Ở phần Đánh giá năng lực với đội ngũ Ban giám khảo là các quản lí và giám
+                        đốc đầu ngành, bạn sẽ được trải nghiệm và giải mã vòng thi Assessment nổi tiếng của các tập đoàn
+                        lớn như Suntory Pepsico, Vinataba Philip Morris, Unilever, Vinamilk, ...</p>
+                    <p>• Phần thứ hai của Nhà chung là các hoạt động networking, gắn kết, truyền cảm hứng để đến
+                        gần hơn với đội ngũ ban giám khảo và những ứng viên xuất sắc khác.</p>
+                    <p>• Trước thềm Assessment Camp, Top 32 sẽ được tham gia chuỗi Đào tạo Kĩ năng Chuyên sâu
+                        (Intensive Training Program) đào tạo các kĩ năng tuyển dụng tầm cao với các trainers
+                        đối tác của chương trình.</p>
+                </div>
+                <div>
+                    <h3><a href="javascript:">Vòng 4: Đêm Chung kết (16/12/2017)</a></h3>
+                    <p>• Tất cả chúng tôi chờ bạn ở đêm Chung kết, để tìm thấy trong bước ngoặt của bạn,
+                        những bước ngoặt của chính chúng tôi.</p>
+                    <p>• Top 6 thể hiện khả năng, bản lĩnh qua các vòng thi trực tiếp trên sân khấu lớn dưới sự đánh giá
+                        và cho điểm của đội ngũ Ban giám khảo, và trong sự theo dõi của 1000 khán giả, để tìm ra quán
+                        quân xứng đáng của Ứng viên Tài năng 2017</p>
                 </div>
             </div>
 
@@ -91,112 +200,44 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="news-section">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Chuyện gì sẽ xảy ra với Top 6</h2>
-                <p class="text-description">Theo dõi hành trình đổi thay của Top 6 và bước ngoặt của họ trong Đêm CK</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6" style="padding: 0;">
-                @foreach($latestArticles as $article)
-                    <div class="news-item">
-                        <div class="thumb">
-                            <div class="thumb bg"
-                                 style="background-image: url('{{ 'http://uvtn.hrc.com.vn/'.$article->images_url }}');"></div>
-                        </div>
-                        <div class="news-title">
-                            <h3><a href="{{route('newsDetail', [$article->slug])}}">{{$article->title}}</a></h3>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="col-md-6" style="padding: 0;">
-                <iframe width="100%" height="360" src="https://www.youtube.com/embed/RruvqqI-vzY" frameborder="0"
-                        gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <br/><br/>
-                <a href="/articles" class="btn btn-default btn-join btn-transparent">Xem Tiếp</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div class="articles-section">
+    {{--<div class="articles-section">
         <div class="section-header text-center">
-            <h2>Vượt cạn Nhà chung</h2>
-            <p class="text-description">Các bài viết hỗ trợ bạn chuẩn bị cho các vòng Assessment</p>
+            <h3>Có những con người đã tạo nên bước ngoặt <br>đổi thay của họ tại Ứng viên Tài năng</h3>
         </div>
         <div class="articles">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="article">
-                        <div class="thumb">
-                            <img src="/final/news/1.jpg" width="100%"/>
-                        </div>
-                        <div>
-                            <h4>
-                                <a href="https://hrc.com.vn/thong-tin/assessment-camp-co-hoi-cua-trai-nghiem-thu-thach-va-toa-sang.html"
-                                   class="article-title">Assessment Camp: Cơ hội của trải nghiệm, thử thách và tỏa
-                                    sáng</a>
-                            </h4>
-                            <p>Assessment Centre thực sự là một thử thách lớn và cực kì khó nhắn trên con đường chinh
-                                phục những chương trình quản lí tập sự (MT) của các tập đoàn lớn.</p>
-                        </div>
+            @foreach($highlightArticle as $article)
+            <div class="col-sm-4 article">
+                <div class="row">
+                    <div class="thumb">
+                        <a href="{{route('newsDetail', [$article->slug])}}">
+                            <img src="{{$article->coverImage ? $article->coverImage->url : '/static/user/images/home-bg1.jpg'}}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-12">
+                        <h4><a href="{{route('newsDetail', [$article->slug])}}" class="article-title">{{$article->title}}</a></h4>
+                        <p>{{$article->description}}</p>
+                        <a href="{{route('newsDetail', [$article->slug])}}" class="read-more">Xem thêm</a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="article">
-                        <div class="thumb">
-                            <img src="/final/news/2.jpg" width="100%"/>
-                        </div>
-                        <div>
-                            <h4>
-                                <a href="https://hrc.com.vn/thong-tin/buoc-vao-assessment-camp-moi-thu-ban-can-tu-khi-duoc-bao-do-toi-sau-khi-thi.html"
-                                   class="article-title">Bước vào Assessment Camp: Mọi thứ bạn cần từ khi được báo đỗ
-                                    tới sau khi thi</a>
-                            </h4>
-                            <p>Vòng Assessment sẽ không chỉ yêu cầu bạn có năng lực vững vàng mà còn cả bản lĩnh phòng
-                                thi...</p>
-                        </div>
+            </div>
+            @endforeach
+            <div class="col-sm-4 article">
+                <div class="row">
+                    <div class="thumb">
+                        <img src="/static/user/images/news3.jpg" alt=""/>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="article">
-                        <div class="thumb">
-                            <img src="/final/news/3.jpg" width="100%"/>
-                        </div>
-                        <div>
-                            <h4>
-                                <a href="https://hrc.com.vn/thong-tin/cac-loai-assessment-tai-cac-tap-doan-khac-nhau.html"
-                                   class="article-title">Các loại Assessment tại các tập đoàn khác nhau</a>
-                            </h4>
-                            <p>Có một thứ vừa gọi là kinh nghiệm, vừa gọi là những kỷ niệm đáng nhớ hay là những bài học
-                                quý giá đầu đời</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="article">
-                        <div class="thumb">
-                            <img src="/final/news/4.jpg" width="100%"/>
-                        </div>
-                        <div>
-                            <h4>
-                                <a href="https://hrc.com.vn/thong-tin/tong-hop-cac-nguon.html"
-                                   class="article-title">Tổng hợp các quyển giải case hữu ích ứng dụng cao</a>
-                            </h4>
-                            <p>Case in Point có thể nói là cuốn sách gối đầu của bất cứ ai có ý định thi vào các công ty
-                                tư vấn chiến lược</p>
+                    <div class="col-xs-12">
+                        <h4><a href="javascript:" class="article-title">Và còn nhiều những câu chuyện khác nữa</a></h4>
+                        <div class="">
+                            <a href="/articles" class="btn btn-default btn-join"> &nbsp;&nbsp;&nbsp;ĐỌC TIẾP&nbsp;&nbsp;&nbsp; </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="clearfix"></div>
         </div>
-    </div> -->
+    </div>--}}
 
     <div class="companion-section">
         <div class="col-sm-10 col-sm-push-1">
@@ -206,344 +247,135 @@
             <br>
             <br>
             <br>
-            <div class="col-sm-3 text-center strategic-partner">
+            <div class="col-sm-6 text-center strategic-partner">
                 <b>Đối tác kim cương</b> <br><br>
-                <img src="/static/user/images/pepsico.png" alt="" width="150px"/>
+                <img src="/static/user/images/pepsico.png" alt=""/>
             </div>
-            <div class="col-sm-4 text-center strategic-partner">
+            <div class="col-sm-6 text-center strategic-partner">
+
                 <b>Đối tác chiến lược</b> <br><br>
-                <img src="/static/user/images/vp-bank.png" alt="" width="150px"/>
-                <img src="/static/user/images/vinataba-philip-morris.png" alt="" width="120px"/>
-            </div>
-            <div class="col-sm-5 text-center professional-support" style="padding:0;">
-                <b>Tài trợ hiện vật</b> <br><br>
-                <img src="/static/user/images/icaew.gif" alt="">
-                <img src="/static/user/images/alphabooks.png" alt="">
-                <img src="/static/user/images/partner/logo/sage.png" alt="">
+                <img src="/static/user/images/vp-bank.png" alt=""/>
+                <img src="/static/user/images/vinataba-philip-morris.png" alt=""/>
             </div>
             <div class="clearfix"></div>
             <br>
             <br>
             <br>
             <br>
-            <div class="col-sm-2 text-center professional-support" style="padding:0;">
-                <b>Nhà tài trợ đồng</b> <br><br>
-                <img src="/static/user/images/partner/logo/tiktak.png" alt="">
+            <div class="col-sm-3 text-center professional-support" style="padding:0;">
+                <b>Tài trợ hiện vật</b> <br><br>
+                <img src="/static/user/images/icaew.gif" alt=""/>
+                <img src="/static/user/images/alphabooks.png" alt=""/>
             </div>
-            <div class="col-sm-4 text-center professional-support" style="padding:0;">
+            <div class="col-sm-3 text-center professional-support" style="padding:0;">
                 <b>Bảo trợ chuyên môn</b> <br><br>
-                <img src="/static/user/images/nielsen.png" alt="">
-                <img src="/static/user/images/navigos-search.png" alt="">
-                <img src="/static/user/images/p_g.png" alt="" style="max-height: 4em;">
+                <img src="/static/user/images/nielsen.png" alt=""/>
+                <img src="/static/user/images/navigos-search.png" alt=""/>
+                <img src="/static/user/images/p_g.png" alt="" style="max-height: 4em;"/>
             </div>
             <div class="col-sm-6 text-center communication-support" style="padding:0;">
                 <b>Bảo trợ truyền thông</b> <br><br>
-                <img src="/static/user/images/partner/ybox.png" alt="">
-                <img src="/static/user/images/coccoc.png" alt="">
-                <img src="/static/user/images/tm.png" alt="">
-                <img src="/static/user/images/partner/brandsvietnam.png" alt="">
+                <img src="/static/user/images/partner/ybox.png" alt=""/>
+				<img src="/static/user/images/coccoc.png" alt=""/>
+                <img src="/static/user/images/tm.png" alt=""/>
+				<img src="/static/user/images/partner/brandsvietnam.png" alt=""/>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
     </div>
 
+    <div class="top-register-cv-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h3>2000 đăng ký đầu tiên sẽ được comment CV</h3>
+            </div>
+            <br>
+            <br>
+            <div class="col-sm-6 text-center">
+                <p>Hạn đăng ký tham gia ứng viên tài năng 2017</p>
+                <span>17.11.2017</span>
+            </div>
+            <div class="col-sm-6 text-center">
+                <p>Thời gian còn lại cho Bước Ngoặt Đổi Thay</p>
+                <div>
+                    <div class="countdown-block" style="">
+                        <div class="square">
+                            <div class="item" id="day">00</div>
+                            <span>Ngày</span>
+                        </div>
+                        <div class="square">
+                            <div class="item" id="hour">00</div>
+                            <span>Giờ</span>
+                        </div>
+                        <div class="square">
+                            <div class="item" id="min">00</div>
+                            <span>Phút</span>
+                        </div>
+                        <div class="square">
+                            <div class="item" id="sec">00</div>
+                            <span>Giây</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
     <div class="join-section">
         <div class="section-header text-center">
-            <h3>Cùng chứng kiến bước ngoặt đổi thay của các ứng viên tài năng</h3>
+            <h3>Đã đến thời điểm cho bước ngoặt đổi thay của bạn</h3>
         </div>
         <br>
         <br>
         <div class="text-center">
-            <!-- <a href="javascript:;" class="btn btn-default btn-join btn-lg subscribe-open"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ĐĂNG KÝ THAM DỰ
-                CHUNG KẾT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a> -->
-            <a href="/joins" class="btn btn-default btn-join btn-lg subscribe-open"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ĐĂNG KÝ THAM DỰ
-                CHUNG KẾT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+            <a href="/joins" class="btn btn-default btn-join btn-lg"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THAM GIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
         </div>
     </div>
 
 @stop
-@push('modal')
-<div class="modal hrc-dashboard-modal fade" id="subscription-modal" tabindex="-1" role="dialog" aria-labelledby="subscription-modal">
-    <div class="modal-dialog" style="width: 650px;" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" id="subscribe-modal-close" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 32px;color: #20a286;opacity: 1;">&times;</button>
-                <br/>
-                <div class="modal-body-wrapper text-center">
-                    <div class="subscribe-form">
-                        <h3>Hãy là người đầu tiên chứng kiến sự lộ diện của<br/>
-                            Top 6 Ứng viên Tài năng mùa thứ 7!</h3>
-                        <p>Đăng ký để cập nhật những diễn biến mới nhất từ Assessment Camp và vòng Chung kết.</p>
-                        <input type="text" class="form-control" id="final-subscription-email" style="width: 80%;margin: auto;" placeholder="Email của bạn">
-                        <br/>
-                        <div class="text-center">
-                            <a href="javascript:;" class="btn btn-default btn-lg btn-join submit-final-subscription">Đăng ký thông tin</a>
-                        </div>
-                    </div>
-                    <div class="subscribe-success" style="display: none;">
-                        <h3>Cảm ơn bạn đã lựa chọn đổi thay<br/>
-                            cùng Ứng viên Tài năng</h3>
-                        <p>Thông tin mới nhất về Ứng viên Tài năng sẽ được cập nhật qua email, bạn hãy chú ý kiểm tra hòm thư thường xuyên nhé.</p>
-                    </div>
-                    <br/>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endpush
+
 @push('styles')
 <link rel="stylesheet" href="/bower_components/owlcarousel/assets/owl.carousel.min.css"/>
 <link rel="stylesheet" href="/bower_components/custom-scroll/jquery.mCustomScrollbar.min.css"/>
-<style>
-    .btn-transparent {
-        background-color: transparent;
-        box-shadow: none !important;
-        color: white;
-    }
-
-    .btn-white, .btn-transparent:hover {
-        background-color: #fff;
-        color: #495259;
-        box-shadow: none !important;
-    }
-
-    .final-intro-section {
-        background: url(/final/header_background.jpg) no-repeat top right;
-        overflow: hidden;
-        position: relative;
-        height: calc(95vh - 15px);
-    }
-
-    .final-intro-section video {
-        width: 100%;
-        position: absolute;
-    }
-
-    .final-intro-section h1 {
-        font-size: 50px;
-        text-transform: uppercase;
-        color: #fff;
-        font-weight: bold;
-        line-height: 70px;
-    }
-
-    .text-description {
-        font-weight: bold;
-        color: #fff;
-        font-size: 18px;
-    }
-
-    .top32-section {
-        background: #171717;
-        padding: 50px 10px;
-    }
-
-    .top32-section h2 {
-        color: #fff;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .top-list {
-        overflow: hidden;
-    }
-
-    .top-item {
-        display: inline-block;
-        width: 16.667%;
-        float: left;
-        padding: 2px;
-        position: relative;
-    }
-
-    @media screen and (max-width: 767px) {
-        .top-item {
-            width: 100% !important;
-        }
-    }
-
-    .top-item .top-info {
-        color: #fff;
-        background: linear-gradient(
-                to bottom,
-                transparent,
-                black
-        );
-        padding: 0 5px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-
-    .top-item:hover .overlay {
-        display: block;
-    }
-
-    .top-item .overlay {
-        position: absolute;
-        width: calc(100% - 4px);
-        height: calc(100% - 4px);
-        background: #ffffff8a;
-        z-index: 100;
-        display: none;
-    }
-
-    .top-info .name {
-        font-weight: bold;
-        margin-bottom: 0;
-    }
-
-    .top-info .university {
-        color: #8c8c8c;
-        margin-bottom: 3px;
-    }
-
-    span.linkedin {
-        font-size: 22px;
-        color: #fff;
-        position: absolute;
-        right: 8px;
-        top: 2px;
-        z-index: 200;
-    }
-
-    .process-section .background {
-        position: absolute;
-        height: 100vh;
-    }
-
-    .process-slider {
-        margin: 0;
-        height: 100vh;
-        padding: 50px;
-    }
-
-    .owl-dot {
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    .owl-dot span {
-        height: 15px;
-        display: inline-block;
-
-        width: 15px;
-        border-radius: 100px;
-        border: solid 1px #6f6f6f;
-    }
-
-    .owl-dot.active span {
-        background: #20a286;
-    }
-
-    .process-slider h2 {
-        font-size: 36px;
-        font-weight: bold;
-    }
-
-    .process-slider .text-description {
-        color: #333;
-        font-weight: normal;
-        font-size: 20px;
-    }
-
-    .process-slider-content {
-        margin-top: 60px;
-        padding-right: 100px;
-    }
-
-    .process-section {
-        height: 100vh;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .process-section p {
-        font-size: 18px;
-    }
-
-    .process-section .owl-dots {
-        margin-top: 20px;
-    }
-
-    .news-section {
-        background: #171717;
-        padding: 50px 10px;
-        overflow: hidden;
-    }
-
-    .news-section h2 {
-        color: #fff;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .news-section .text-description {
-        color: #8c8c8c;
-        text-align: center;
-        font-weight: normal;
-    }
-
-    .news-section .news-item {
-        width: 50%;
-        float: left;
-        height: 180px;
-        position: relative;
-    }
-
-    .news-section .news-item .thumb {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        z-index: 0;
-    }
-
-    .news-section .text-description {
-        font-weight: normal;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .news-section .news-title {
-        position: absolute;
-        bottom: 0;
-        background: linear-gradient(
-                to bottom,
-                transparent,
-                black
-        );
-        padding: 0 10px;
-    }
-
-    .news-section .news-title h3 {
-        font-size: 15px;
-        font-weight: bold;
-    }
-
-    .articles {
-        padding: 0 50px;
-    }
-
-    .article h4 {
-        font-size: 18px;
-    }
-
-    .articles-section .section-header h2 {
-        font-weight: bold;
-        margin-top: 0;
-    }
-
-    .articles-section .section-header .text-description {
-        color: #8c8c8c;
-        font-weight: normal;
-        margin-bottom: 50px;
-    }
-</style>
 @endpush
 @push('scripts')
+<script type="text/javascript">
+    // Set the date we're counting down to
+    var countDownDate = new Date("Nov 17, 2017 23:59:59").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now an the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("day").innerHTML = ('0'+String(days)).slice(-2);
+      document.getElementById("hour").innerHTML = ('0'+String(hours)).slice(-2);
+      document.getElementById("min").innerHTML = ('0'+String(minutes)).slice(-2);
+      document.getElementById("sec").innerHTML = ('0'+String(seconds)).slice(-2);
+
+      // If the count down is finished, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("day").innerHTML = '00';
+      document.getElementById("hour").innerHTML = '00';
+      document.getElementById("min").innerHTML = '00';
+      document.getElementById("sec").innerHTML = '00';
+      }
+    }, 1000);
+</script>
 <script type="text/javascript" src="/bower_components/owlcarousel/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/bower_components/custom-scroll/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
@@ -554,8 +386,9 @@
     });
 
 
+
     var owl1 = $('.owl-slider-members');
-    var owl2 = $('.process-slider-content');
+    var owl2 = $('.process-slider');
 
 
     owl1.owlCarousel({
@@ -565,73 +398,83 @@
         // lazyLoad: true,
         center: true,
         items: 1,
-        navText: []
+        navText: [
+        ]
     });
     owl2.owlCarousel({
         loop: false,
         margin: 30,
-        nav: false,
-        dots: true,
+        nav: true,
         // lazyLoad: true,
         center: true,
         items: 1,
-        navText: []
+        navText: [
+        ]
     });
 
-    owl2.on('changed.owl.carousel', function (event) {
-        var element = event.target;
-        var item = event.item.index;
+    owl2.on('changed.owl.carousel', function(event) {
+        var element   = event.target;
+        var item      = event.item.index;
+        var classes = ['round1','round2','round3','round4'];
 
-        $(element).closest('.process-section').find('.background').fadeOut();
-        $(element).closest('.process-section').find('.background').eq(item).fadeIn();
+        $(element).closest('.process-section').removeClass('round1 round2 round3 round4');
+        $(element).closest('.process-section').addClass(classes[item]);
 
     });
 
     $(document).ready(function () {
         $('.article img').height($('.article img').width() * .667);
 
-//        owl2.find('.owl-item').mCustomScrollbar({
-//            setHeight: 220,
-//            autoHideScrollbar: true,
-//            theme: "dark",
-//            scrollInertia: 400,
-//            advanced: {
-//                updateOnContentResize: true
-//            }
-//        });
+        owl2.find('.owl-item').mCustomScrollbar({
+            setHeight: 220,
+            autoHideScrollbar: true,
+            theme: "dark",
+            scrollInertia: 400,
+            advanced: {
+                updateOnContentResize: true
+            }
+        });
 
         $('#main-text-intro').height($('.news-section-intro').height());
     });
-
-    var switchtext = ['yêu thương', 'nỗ lực', 'gia đình', 'sự dũng cảm'];
-    setInterval(function () {
-        $('#switch-text').html(switchtext[Math.floor(Math.random() * 3) + 1]);
-    }, 5000);
-
-    $('.subscribe-open').click(function(){
-        $("#subscription-modal").modal();
-    });
-
-    $('.submit-final-subscription').click(function(){
-        $.ajax({
-            type: 'POST',
-            url: '{{ route('submit-final-subscription') }}',
-            data: { email: $('#final-subscription-email').val() },
-            success: function(response){
-                if(response.success){
-                    $('.subscribe-success').show();
-                    $('.subscribe-form').hide();
-                    $('#final-subscription-email').val('');
-                } else {
-                    alert('Vui lòng kiểm tra lại thông tin hoặc thử lại sau.');
-                }
-            }
-        })
-    });
-
-    $("#subscription-modal").on('hidden.bs.modal', function () {
-        $('.subscribe-form').show();
-        $('.subscribe-success').hide();
-    });
 </script>
+<style type="text/css">
+    .square {
+        display: inline-block;
+        text-align: center;
+        margin-left: 5px;
+    }
+    .countdown-block {
+        width: 100%; text-align: center;
+        float: left;
+    }
+
+    .square .item {
+        width: 80px;
+        text-align: center;
+        background: #fff;
+        height: 60px;
+        vertical-align: middle;
+        display: table-cell;
+        border: solid 1px #ddd;
+        border-bottom: solid 3px #169c80;
+        border-radius: 3px;
+        color: #169c80;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .square span {
+        padding-top: 10px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .countdown-block p {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
 @endpush
